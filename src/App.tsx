@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState } from 'react';
+import { getList } from './services/Api';
+import { List } from './interfaces/CommonProps';
 import './App.css';
+import TodoList from './components/TodoList.component';
+import TodoInput from './components/TodoInput.component';
 
-function App() {
+const App: React.FC = () => {
+  const [itemlist, Additemlist] = useState<List[]>([])
+  let [count, nextcount] = useState(0)
+  
+  useEffect(() => {
+    (async () => {
+      Additemlist(await getList());
+    })()
+  }, [count])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App"> 
+      <TodoInput initialstate={count} statechanger={nextcount}/>
+      <TodoList initialstate={count} statechanger={nextcount} todoList={itemlist}/>
     </div>
   );
 }
 
 export default App;
+
+
