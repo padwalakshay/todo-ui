@@ -5,7 +5,7 @@ import apiconfig  from '../config'
 export const getList = async ()  => {
     try {
       const result = await axios.get(`${apiconfig.url}/lists`)
-      return result.data
+      return result.data.data
     } catch (error) {
       return error;
     }

@@ -25,7 +25,7 @@ const TodoList:React.FC<ListInputProps> = ( {initialstate, statechanger, todoLis
         <div>
         <ul className="removebullets">
        {
-        todoList.length && todoList.map(({id, name, action}, index) => {
+        todoList.length > 0 && todoList.map(({id, name, action}, index) => {
             return (tmplt(action, index, id, name))
         })
        }
